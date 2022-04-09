@@ -10,8 +10,9 @@ from PIL import Image
 import PIL
 import time
 import streamlit as st
+import base64
 
-st.title(" **Object Detection** ")
+st.markdown("<center><h1 style='color:blue'><b>Object Detection Machine Learning </b></h1></center>",unsafe_allow_html=True)
 #converting image into array
 def load_image(image_path):
     img = Image.open( image_path )
@@ -27,35 +28,38 @@ def predictor(img_path): #
     image = load_image(img_path)
     image = np.expand_dims(image, axis=0)
     preds = model.predict(image)
-    print('Predicted:', decode_predictions(preds))
     return(preds)
 #saving video
 def save_uploaded_file(uploaded_file,type=["mp4","avi","webm","mov",""]):
-
     try:
-
         with open(os.path.join('static/videos',uploaded_file.name),'wb') as f:
-
             f.write(uploaded_file.getbuffer())
-
         return 1    
-
     except:
-
         return 0
 #put queries here
-search = (st.text_input("Type The Name Of Search Object....")).lower()
+search = st.text_input("Type The Name Of Search Object....")
 uploaded_file = st.file_uploader("Upload Video",type=["mkv","mp4",'avi','flv','webm','vob','mov','ogg','wmv','3gp'])
 if uploaded_file is not None:
     notfound = True
-    img = Image.open(os.path.join('static/images/',"loading.jpg"))
-    st.image("loading.....")
+    img = Image.open(os.path.join('static/images/loading.gif'))
     if save_uploaded_file(uploaded_file):   	
         capture = cv2.VideoCapture(os.path.join('static/videos',uploaded_file.name))
+        global videopath 
+        videopath = os.path.join('static/videos',uploaded_file.name)
         st.video(os.path.join('static/videos',uploaded_file.name))
+        file_ = open(os.path.join('static/images/loading.gif'), "rb")
+        contents = file_.read()
+        data_url = base64.b64encode(contents).decode("utf-8")
+        file_.close()
+
+        st.markdown(
+            f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">',
+            unsafe_allow_html=True,
+        )
         frameNr = 0
-        
-        while (True):
+        success, frame = capture.read()
+        while (success):
         
             success, frame = capture.read()
         
@@ -70,10 +74,10 @@ if uploaded_file is not None:
                     notfound = False
                     disp_img = cv2.imread(os.path.join(f'static/images/{frameNr}.jpg'))
                     #display prediction text over the image
-                    pic = cv2.putText(disp_img, search, (20,20), cv2.FONT_HERSHEY_TRIPLEX , 0.8, (255,255,255))
+                    pic = cv2.putText(disp_img, search + " Is On this Frame", (40,40), cv2.FONT_HERSHEY_TRIPLEX , 1.8, (0,0,0))
                     st.image(pic)
                     st.text('Predictions :-')
-                    st.text(prediction)
+                    st.success("Other Items Detected : " + str(predition_names))
                     os.remove(os.path.join(f'static/images/{frameNr}.jpg'))#deleting the image to savespace 
                     break
             else:
@@ -81,10 +85,10 @@ if uploaded_file is not None:
         
             frameNr = frameNr+1
         
-    capture.release()
-    time.sleep(120) # delay b4 deleting the video
-    os.remove(os.path.join(f'static/videos/'+uploaded_file.name)
-    if notfound :
-        st.write("Item you searched was not found ")
-        # display the image
+        capture.release()
+        time.sleep(20) # delay b4 deleting the video
+        if notfound :
+            st.write("Item you searched was not found ")
+        st.warning("Code Executed Successfully !!!!!!!!!!")
+    os.remove(videopath)
 
