@@ -81,10 +81,10 @@ if uploaded_file is not None:
         
             frameNr = frameNr+1
         
-        capture.release()
-        time.sleep(120) # delay b4 deleting the video
-        os.remove(os.path.join(f'static/videos/'+uploaded_file.name)
-        if notfound :
-            st.write("Item you searched was not found ")
+    capture.release()
+    time.sleep(120) # delay b4 deleting the video
+    os.remove(os.path.join(f'static/videos/'+uploaded_file.name)
+    if notfound :
+        st.write("Item you searched was not found ")
         # display the image
 
