@@ -44,7 +44,7 @@ def save_uploaded_file(uploaded_file,type=["mp4","avi","webm","mov",""]):
 
         return 0
 #put queries here
-search = st.text_input("Type The Name Of Search Object....")
+search = (st.text_input("Type The Name Of Search Object....")).lower()
 uploaded_file = st.file_uploader("Upload Video",type=["mkv","mp4",'avi','flv','webm','vob','mov','ogg','wmv','3gp'])
 if uploaded_file is not None:
     notfound = True
