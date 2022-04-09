@@ -48,7 +48,8 @@ search = (st.text_input("Type The Name Of Search Object....")).lower()
 uploaded_file = st.file_uploader("Upload Video",type=["mkv","mp4",'avi','flv','webm','vob','mov','ogg','wmv','3gp'])
 if uploaded_file is not None:
     notfound = True
-    st.write("loading.....")
+    img = Image.open(os.path.join('static/images/',"loading.jpg"))
+    st.image("loading.....")
     if save_uploaded_file(uploaded_file):   	
         capture = cv2.VideoCapture(os.path.join('static/videos',uploaded_file.name))
         st.video(os.path.join('static/videos',uploaded_file.name))
@@ -82,7 +83,7 @@ if uploaded_file is not None:
         
         capture.release()
         time.sleep(120) # delay b4 deleting the video
-        os.remove('static/videos/'+uploaded_file.name)
+        os.remove(os.path.join(f'static/videos/'+uploaded_file.name)
         title = st.text_input('Movie title', 'Life of Brian')
         st.write('The End', title)
         if notfound :
