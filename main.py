@@ -96,5 +96,7 @@ if uploaded_file is not None:
         time.sleep(20) # delay b4 deleting the video
         if notfound :
             st.warning("Item you searched was not found ")
+            st.success("Other Items Detected : " + str(predition_names))
         st.success("Code Executed Successfully !!!!!!!!!!")
         delete_uploaded_file()
+
