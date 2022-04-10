@@ -32,7 +32,7 @@ def set_png_as_page_bg(png_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
     return
 
-set_png_as_page_bg(os.path.join('static/images/background.jpg'))
+set_png_as_page_bg(os.path.join('static/images/background.png'))
 st.markdown("<center><h1 style='text-shadow:3px 3px 4px blue'><b><u>Object Detection Machine Learning</u> </b></h1></center>",unsafe_allow_html=True)
 #converting image into array
 def load_image(image_path):
