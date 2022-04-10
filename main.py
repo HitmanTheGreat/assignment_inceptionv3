@@ -12,6 +12,16 @@ import time
 import streamlit as st
 import base64
 #header
+page_bg_img = '''
+<style>
+body {
+background-image: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366");
+background-size: cover;
+}
+</style>
+'''
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
 st.markdown("<center><h1 style='text-shadow:3px 3px 4px blue'><b><u>Object Detection Machine Learning</u> </b></h1></center>",unsafe_allow_html=True)
 #converting image into array
 def load_image(image_path):
