@@ -62,7 +62,7 @@ if uploaded_file is not None:
         file_.close()
 
         st.markdown(
-            f'<marquee><img src="data:image/gif;base64,{data_url}" alt="cat gif"></marquee>',
+            f'<center><img src="data:image/gif;base64,{data_url}" alt="cat gif"></center>',
             unsafe_allow_html=True,
         )
         frameNr = 0
