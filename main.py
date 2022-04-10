@@ -103,7 +103,7 @@ if uploaded_file is not None:
                     notfound = False
                     disp_img = cv2.imread(os.path.join(f'static/images/{frameNr}.jpg'))
                     #display prediction text over the image
-                    pic = cv2.putText(disp_img, search + " Is On this Frame", (40,40), cv2.FONT_HERSHEY_TRIPLEX , 2.8, (255,255,255))
+                    pic = cv2.putText(disp_img, search + " Is On this Frame", (20,20), cv2.FONT_HERSHEY_TRIPLEX , 0.8, (255,255,255))
                     st.image(pic)
                     st.success("Other Items Detected : " + str(predition_names))
                     os.remove(os.path.join(f'static/images/{frameNr}.jpg'))#deleting the image to savespace 
