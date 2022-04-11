@@ -105,7 +105,7 @@ if uploaded_file is not None:
                     #display prediction text over the image
                     pic = cv2.putText(disp_img, search + " Is On this Frame", (60,60), cv2.FONT_HERSHEY_TRIPLEX , 2.8, (255,255,255))
                     st.image(pic)
-                    st.success("Other Items Detected : " + str(predition_names))
+                    st.success("Other Items Detected : " + str(prediction))
                     os.remove(os.path.join(f'static/images/{frameNr}.jpg'))#deleting the image to savespace 
                     break
             else:
