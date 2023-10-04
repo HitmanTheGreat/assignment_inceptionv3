@@ -1,7 +1,7 @@
 opencv-python-headless
 keras
-numpy==1.19.5
-Pillow==9.1.0
-streamlit==1.8.1
+numpy
+Pillow
+streamlit
 tensorflow
 tensorflow_gpu
