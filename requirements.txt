@@ -3,4 +3,3 @@ keras
 numpy
 Pillow
 tensorflow
-tensorflow_gpu
